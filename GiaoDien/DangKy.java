@@ -38,7 +38,7 @@ public class DangKy extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        QuayLai150 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
         DangNhapNgay150 = new javax.swing.JButton();
@@ -58,17 +58,17 @@ public class DangKy extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(0, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 0, 0));
-        jButton1.setText("Đã Có Tài Khoản");
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        QuayLai150.setBackground(new java.awt.Color(0, 255, 255));
+        QuayLai150.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        QuayLai150.setForeground(new java.awt.Color(255, 0, 0));
+        QuayLai150.setText("Đã Có Tài Khoản");
+        QuayLai150.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        QuayLai150.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                QuayLai150ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 160, 30));
+        jPanel1.add(QuayLai150, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 160, 30));
 
         jSeparator1.setForeground(new java.awt.Color(0, 255, 204));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 220, -1));
@@ -175,7 +175,7 @@ public class DangKy extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
-       
+
         boolean kt = true;
 
         if (MaNhanVien.equals("")) {
@@ -205,14 +205,14 @@ public class DangKy extends javax.swing.JFrame {
                     kt = true;
                 }
                 if (kt == true) {
-                 String ctv = "insert into Users values(" + MaNhanVien
-                + " ,'" + TenDangNhap + "' , '" + Password + "' ," + Quyen
-                + ", N' ')";
-        System.out.println(cautruyvan);
-            main.connection.ExcuteQueryUpdateDB(ctv);
-            System.out.println("Đã Thêm Thành Công");
-        } else {
-            ThongBao("Không thể Thêm tài Khoản", "lỗi", 2);
+                    String ctv = "insert into Users values(" + MaNhanVien
+                            + " ,'" + TenDangNhap + "' , '" + Password + "' ," + Quyen
+                            + ", N' ')";
+                    System.out.println(cautruyvan);
+                    main.connection.ExcuteQueryUpdateDB(ctv);
+                    System.out.println("Đã Thêm Thành Công");
+                } else {
+                    ThongBao("Không thể Thêm tài Khoản", "lỗi", 2);
                 }
             }
         }
@@ -224,13 +224,11 @@ public class DangKy extends javax.swing.JFrame {
         // TODO add your handling code here:
         String strUsername = txtUserName150.getText().trim();
         String strPassword = String.valueOf(txtPassword150.getText()).trim();
-        if(strUsername.equals("")){
+        if (strUsername.equals("")) {
             ThongBao("Bạn Chưa Nhập: Tên Đăng Nhập", "Lỗi đăng nhập", 2);
-        }else
-            if(strPassword.equals("")){
+        } else if (strPassword.equals("")) {
             ThongBao("Bạn Chưa Nhập: Mật Khẩu", "Lỗi đăng nhập", 2);
-        }else
-           if (KiemTra(strUsername, strPassword)) {
+        } else if (KiemTra(strUsername, strPassword)) {
             Main.main.frmTC.show();
             this.dispose();
         } else {
@@ -238,13 +236,13 @@ public class DangKy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DangNhapNgay150ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void QuayLai150ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuayLai150ActionPerformed
         // TODO add your handling code here:
-         DangNhap l = new DangNhap();
+        DangNhap l = new DangNhap();
         l.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-private boolean KiemTra(String tdn, String mk) {
+    }//GEN-LAST:event_QuayLai150ActionPerformed
+    private boolean KiemTra(String tdn, String mk) {
         boolean kq = false;
 
         String cautruyvan = "select * from Users where TenDangNhap= '" + tdn + "' and Password= '" + mk + "'";
@@ -275,19 +273,12 @@ private boolean KiemTra(String tdn, String mk) {
         return ketqua;
     }
 
-    public boolean KiemTraEmail(String email) {
-        boolean kq = false;
-        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-        Pattern v = Pattern.compile(EMAIL_PATTERN);
-        Matcher m = v.matcher(email);
-        kq = m.matches();
-        return kq;
-    }
-
+    
     private void ThongBao(String noiDungThongBao, String tieuDeThongBao, int icon) {
         JOptionPane.showMessageDialog(new JFrame(), noiDungThongBao,
                 tieuDeThongBao, icon);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -325,8 +316,8 @@ private boolean KiemTra(String tdn, String mk) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DangNhapNgay150;
+    private javax.swing.JButton QuayLai150;
     private javax.swing.JButton TaoTaiKhoan150;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
